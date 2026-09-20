@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Shirwal Spice | Restaurant</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #fffaf5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* NAVBAR */
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 8%;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            color: #8b1e1e;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 28px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+        }
+
+        nav ul li a:hover {
+            color: #d35400;
+        }
+
+        /* HERO */
+
+        .hero {
+            min-height: 650px;
+
+            background:
+                linear-gradient(rgba(0,0,0,0.58), rgba(0,0,0,0.58)),
+                url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=80");
+
+            background-size: cover;
+            background-position: center;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+            color: white;
+            padding: 30px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-content h1 {
+            font-size: 62px;
+            margin-bottom: 12px;
+        }
+
+        .hero-content p {
+            font-size: 22px;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 13px 28px;
+            background: #d35400;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: 0.3s;
+            border: none;
+        }
+
+        .btn:hover {
+            background: #a83f00;
+            transform: translateY(-3px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+            margin-left: 10px;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: #8b1e1e;
+        }
+
+        /* COMMON */
+
+        section {
+            padding: 80px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title h2 {
+            color: #8b1e1e;
+            font-size: 36px;
+            margin-bottom: 8px;
+        }
+
+        .section-title p {
+            color: #777;
+            font-size: 16px;
+        }
+
+        /* ABOUT */
+
+        .about {
+            max-width: 850px;
+            margin: auto;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .about-highlight {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .highlight-box {
+            background: white;
+            padding: 22px;
+            border-radius: 15px;
+            width: 200px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .highlight-box span {
+            font-size: 30px;
+        }
+
+        .highlight-box h3 {
+            color: #8b1e1e;
+            margin-top: 8px;
+        }
+
+        /* MENU */
+
+        .menu {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .category {
+            display: inline-block;
+            background: #fff0e6;
+            color: #d35400;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .card h3 {
+            color: #8b1e1e;
+            font-size: 21px;
+            margin-bottom: 6px;
+        }
+
+        .card p {
+            color: #777;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            color: #d35400 !important;
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+        .order-btn {
+            display: block;
+            text-align: center;
+            background: #25D366;
+            color: white;
+            padding: 10px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        .order-btn:hover {
+            background: #1da851;
+        }
+
+        /* OFFER */
+
+        .offer {
+            background:
+                linear-gradient(rgba(139,30,30,0.94), rgba(139,30,30,0.94)),
+                url("https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80");
+
+            background-size: cover;
+            background-position: center;
+
+            color: white;
+            text-align: center;
+            border-radius: 25px;
+            padding: 65px 20px;
+        }
+
+        .offer h2 {
+            font-size: 35px;
+            margin-bottom: 12px;
+        }
+
+        .offer p {
+            font-size: 18px;
+            margin-bottom: 25px;
+        }
+
+        /* GALLERY */
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            border-radius: 18px;
+            transition: 0.3s;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.03);
+        }
+
+        /* CONTACT */
+
+        .contact-container {
+            max-width: 1000px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .contact-box {
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        .contact-box h3 {
+            color: #8b1e1e;
+            font-size: 25px;
+            margin-bottom: 20px;
+        }
+
+        .contact-box p {
+            margin: 15px 0;
+            font-size: 17px;
+        }
+
+        .whatsapp {
+            background: #25D366;
+            margin-top: 15px;
+        }
+
+        .whatsapp:hover {
+            background: #1da851;
+        }
+
+        .map-box {
+            background: white;
+            padding: 12px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .map-box iframe {
+            width: 100%;
+            height: 350px;
+            border: 0;
+            border-radius: 15px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #241414;
+            color: white;
+            text-align: center;
+            padding: 35px 20px;
+        }
+
+        footer h3 {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        footer p {
+            color: #ddd;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 1000px) {
+
+            .menu {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            nav {
+                flex-direction: column;
+                gap: 12px;
+                padding: 15px 5%;
+            }
+
+            nav ul {
+                gap: 15px;
+                font-size: 13px;
+            }
+
+            .hero {
+                min-height: 550px;
+            }
+
+            .hero-content h1 {
+                font-size: 40px;
+            }
+
+            .hero-content p {
+                font-size: 17px;
+            }
+
+            .btn-outline {
+                margin-left: 0;
+                margin-top: 12px;
+            }
+
+            section {
+                padding: 55px 5%;
+            }
+
+            .section-title h2 {
+                font-size: 30px;
+            }
+
+            .menu {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .about-highlight {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .highlight-box {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav>
+
+        <div class="logo">
+            🍽️ Shirwal Spice
+        </div>
+
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+
+    </nav>
+
+
+    <!-- HERO -->
+
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <h1>Shirwal Spice</h1>
+
+            <p>
+                Fresh Food. Great Taste. Happy Moments.
+            </p>
+
+            <a href="#menu" class="btn">
+                Explore Menu
+            </a>
+
+            <a href="#contact" class="btn btn-outline">
+                Contact Us
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- ABOUT -->
+
+    <section id="about">
+
+        <div class="section-title">
+
+            <h2>About Us</h2>
+
+            <p>
+                Good food brings people together ❤️
+            </p>
+
+        </div>
+
+        <div class="about">
+
+            <p>
+                Welcome to Shirwal Spice! We serve delicious and freshly
+                prepared food using quality ingredients. Whether you are
+                enjoying a family dinner, meeting friends or celebrating
+                a special moment, we are here to make it memorable.
+            </p>
+
+            <div class="about-highlight">
+
+                <div class="highlight-box">
+                    <span>🍽️</span>
+                    <h3>Fresh Food</h3>
+                    <p>Freshly prepared dishes</p>
+                </div>
+
+                <div class="highlight-box">
+                    <span>⭐</span>
+                    <h3>Quality</h3>
+                    <p>Quality ingredients</p>
+                </div>
+
+                <div class="highlight-box">
+                    <span>❤️</span>
+                    <h3>Family</h3>
+                    <p>Perfect family dining</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- MENU -->
+
+    <section id="menu">
+
+        <div class="section-title">
+
+            <h2>Our Popular Menu</h2>
+
+            <p>
+                Freshly prepared and full of flavour
+            </p>
+
+        </div>
+
+
+        <div class="menu">
+
+
+            <!-- PANEER -->
+
+            <div class="card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1757715376287-90f24dac4593?auto=format&fit=crop&w=600&q=80"
+                    alt="Paneer Tikka">
+
+                <div class="card-content">
+
+                    <span class="category">
+                        🍢 Starters
+                    </span>
+
+                    <h3>Paneer Tikka</h3>
+
+                    <p>
+                        Delicious grilled paneer with spices.
+                    </p>
+
+                    <p class="price">
+                        ₹180
+                    </p>
+
+                    <a
+                        href="https://wa.me/919876543210?text=Hello%20I%20want%20to%20order%20Paneer%20Tikka"
+                        class="order-btn"
+                        target="_blank">
+
+                        💬 Order Now
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- BIRYANI -->
+
+            <div class="card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1596560520688-e1ecc9da2099?auto=format&fit=crop&w=600&q=80"
+                    alt="Veg Biryani">
+
+                <div class="card-content">
+
+                    <span class="category">
+                        🍛 Main Course
+                    </span>
+
+                    <h3>Veg Biryani</h3>
+
+                    <p>
+                        Flavorful aromatic rice with vegetables.
+                    </p>
+
+                    <p class="price">
+                        ₹160
+                    </p>
+
+                    <a
+                        href="https://wa.me/919876543210?text=Hello%20I%20want%20to%20order%20Veg%20Biryani"
+                        class="order-btn"
+                        target="_blank">
+
+                        💬 Order Now
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- DOSA -->
+
+            <div class="card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=600&q=80"
+                    alt="Masala Dosa">
+
+                <div class="card-content">
+
+                    <span class="category">
+                        🥞 South Indian
+                    </span>
+
+                    <h3>Masala Dosa</h3>
+
+                    <p>
+                        Crispy dosa with tasty potato filling.
+                    </p>
+
+                    <p class="price">
+                        ₹100
+                    </p>
+
+                    <a
+                        href="https://wa.me/919876543210?text=Hello%20I%20want%20to%20order%20Masala%20Dosa"
+                        class="order-btn"
+                        target="_blank">
+
+                        💬 Order Now
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- PIZZA -->
+
+            <div class="card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=600&q=80"
+                    alt="Pizza">
+
+                <div class="card-content">
+
+                    <span class="category">
+                        🍕 Fast Food
+                    </span>
+
+                    <h3>Pizza</h3>
+
+                    <p>
+                        Hot, cheesy and delicious pizza.
+                    </p>
+
+                    <p class="price">
+                        ₹220
+                    </p>
+
+                    <a
+                        href="https://wa.me/919876543210?text=Hello%20I%20want%20to%20order%20Pizza"
+                        class="order-btn"
+                        target="_blank">
+
+                        💬 Order Now
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- SPECIAL OFFER -->
+
+    <section>
+
+        <div class="offer">
+
+            <h2>
+                🍕 Special Food Offer
+            </h2>
+
+            <p>
+                Enjoy delicious food with your family and friends.
+            </p>
+
+            <a href="#contact" class="btn">
+                Book Your Table
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- GALLERY -->
+
+    <section id="gallery">
+
+        <div class="section-title">
+
+            <h2>Food Gallery</h2>
+
+            <p>
+                A glimpse of what we serve
+            </p>
+
+        </div>
+
+
+        <div class="gallery">
+
+            <img
+                src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80"
+                alt="Restaurant Food">
+
+            <img
+                src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=80"
+                alt="Indian Food">
+
+            <img
+                src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80"
+                alt="Pizza">
+
+            <img
+                src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=800&q=80"
+                alt="Grilled Food">
+
+            <img
+                src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=800&q=80"
+                alt="Restaurant Dish">
+
+            <img 
+                src="https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=800&q=80"
+                alt="Biryani">
+                
+
+        </div>
+
+    </section>
+
+
+    <!-- CONTACT -->
+
+    <section id="contact">
+
+        <div class="section-title">
+
+            <h2>Contact Us</h2>
+
+            <p>
+                We would love to hear from you
+            </p>
+
+        </div>
+
+
+        <div class="contact-container">
+
+
+            <!-- CONTACT DETAILS -->
+
+            <div class="contact-box">
+
+                <h3>📞 Get In Touch</h3>
+
+                <p>
+                    📞 <strong>9876543210</strong>
+                </p>
+
+                <p>
+                    📍 Shirwal, Maharashtra
+                </p>
+
+                <p>
+                    🕐 11:00 AM – 10:30 PM
+                </p>
+
+                <a
+                    href="https://wa.me/919876543210"
+                    class="btn whatsapp"
+                    target="_blank">
+
+                    💬 WhatsApp Us
+
+                </a>
+
+            </div>
+
+
+            <!-- GOOGLE MAP -->
+
+            <div class="map-box">
+
+                <iframe
+                    src="https://www.google.com/maps?q=Shirwal,Maharashtra&output=embed"
+                    loading="lazy">
+                </iframe>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <h3>
+            🍽️ Shirwal Spice
+        </h3>
+
+        <p>
+            Fresh Food. Great Taste. Happy Moments.
+        </p>
+
+        <p style="margin-top:10px;">
+            © 2026 Shirwal Spice | All Rights Reserved
+        </p>
+
+    </footer>
+
+
+</body>
+</html>
